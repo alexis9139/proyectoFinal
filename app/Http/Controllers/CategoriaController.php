@@ -39,7 +39,8 @@ class CategoriaController extends Controller
 
     public function update(Request $request)
     {
-        $categoria = Categoria::findOrFail($request->id);
+        //se cambio y se puso id_categoria que esto viene del formulario
+        $categoria = Categoria::findOrFail($request->id_categoria);
         $categoria->nombre = $request->nombre;
         $categoria->descripcion = $request->descripcion;
         $categoria->condicion = '1';
@@ -49,8 +50,18 @@ class CategoriaController extends Controller
 
 
 
-    public function destroy($id)
+    public function destroy(Request $request)//aqui le agregamos el request
     {
-        //
+        //id_categoria viene desde el formulario
+        $categoria = Categoria::findOrFail($request->id_categoria);//toma el id para editar
+        if($categoria->condicion == '1'){//si esta activo
+            $categoria->condicion = '0';
+            $categoria->save();
+            return Redirect::to('categoria');
+        }else{
+            $categoria->condicion = '1';
+            $categoria->save();
+            return Redirect::to('categoria');
+        }
     }
 }
