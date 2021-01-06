@@ -26,27 +26,25 @@ class CategoriaController extends Controller
 
     public function store(Request $request)
     {
-        //Creamos una instancia de la clase Categoria
         $categoria = new Categoria();
-        // $categoria->nombre esto significa que el objeto llama a las propiedades que estan en el modelo Categoria
-        // es decir  $categoria->nombre son los campos
-        // por lo tanto a cada unos de esos campos le mandamos lo que recibimos del objeto $request
-        // el objeto $request lo recibimos del formulario, es de decir de name
         $categoria->nombre = $request->nombre;
         $categoria->descripcion = $request->descripcion;
-        $categoria->condicion = 1;
-        // aqui se hace el registro en el save
+        $categoria->condicion = '1';
         $categoria->save();
-        //redireccionamos a la ruta categoria que esta en web.php luego de hacer el save
         return Redirect::to('categoria');
     }
 
 
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $categoria = Categoria::findOrFail($request->id);
+        $categoria->nombre = $request->nombre;
+        $categoria->descripcion = $request->descripcion;
+        $categoria->condicion = '1';
+        $categoria->save();
+        return Redirect::to('categoria');
     }
 
 
