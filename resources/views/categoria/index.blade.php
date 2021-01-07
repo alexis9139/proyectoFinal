@@ -60,7 +60,7 @@
                                 </td>
 
                                 <td>
-                                    <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#abrirmodal">
+                                    <button type="button" class="btn btn-info btn-md" data-id-categoria="{{$cat->id}}" data-nombre="{{$cat->nombre}}" data-descripcion="{{$cat->descripcion}}" data-toggle="modal" data-target="#abrirmodalEditar">
                                     <i class="fa fa-edit fa-2x"></i> Editar
                                     </button> &nbsp;
                                 </td>
@@ -105,6 +105,38 @@
         <!-- /.modal-dialog -->
     </div>
     <!--Fin del modal-->
+
+
+
+        <!--Inicio del modal editar categoria-->
+        <div class="modal fade" id="abrirmodalEditar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-primary modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Editar categoría</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                   
+                    <div class="modal-body">
+                        {{-- FORMULARIO PARA STORE --}}
+                        <form action="{{route('categoria.update','test')}}" method="post" class="form-horizontal">
+                            {{-- codigo cuando se edita un registro --}}
+                            {{method_field('patch')}}
+                            {{-- {{csrf_field()}} es para evitar los ataques--}}
+                            {{csrf_field()}}
+
+                            <input type="hidden" id="id_categoria" name="id_categoria" value="">
+                            @include('categoria.form')
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!--Fin del modal-->
    
 </main>
 
