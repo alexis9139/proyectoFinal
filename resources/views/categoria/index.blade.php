@@ -54,21 +54,35 @@
                                 <td>{{$cat->nombre}}</td>
                                 <td>{{$cat->descripcion}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-md">
-                                    <i class="fa fa-check fa-2x"></i> Activo
-                                    </button>
+                                    {{-- debemos validar si esta activo o no --}}
+                                    @if($cat->condicion=="1")
+
+                                        <button type="button" class="btn btn-success btn-md disabled">
+                                        <i class="fa fa-check fa-2x"></i> Activo
+                                        </button>
+                                    @else
+                                        <button type="button" class="btn btn-danger btn-md disabled">
+                                        <i class="fa fa-check fa-2x"></i> Desactivado
+                                        </button>
+                                    @endif      
                                 </td>
 
                                 <td>
-                                    <button type="button" class="btn btn-info btn-md" data-id-categoria="{{$cat->id}}" data-nombre="{{$cat->nombre}}" data-descripcion="{{$cat->descripcion}}" data-toggle="modal" data-target="#abrirmodalEditar">
+                                    <button type="button" class="btn btn-info btn-md" data-id_categoria="{{$cat->id}}" data-nombre="{{$cat->nombre}}" data-descripcion="{{$cat->descripcion}}" data-toggle="modal" data-target="#abrirmodalEditar">
                                     <i class="fa fa-edit fa-2x"></i> Editar
                                     </button> &nbsp;
                                 </td>
 
                                 <td>
-                                    <button type="button" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-lock fa-2x"></i> Desactivar
-                                    </button>
+                                    @if($cat->condicion)
+                                        <button type="button" class="btn btn-danger btn-sm" data-id_categoria="{{$cat->id}}" data-toggle="modal" data-target="#cambiarEstado">
+                                            <i class="fa fa-lock fa-2x"></i> Desactivar
+                                        </button>
+                                    @else
+                                        <button type="button" class="btn btn-success btn-sm" data-id_categoria="{{$cat->id}}" data-toggle="modal" data-target="#cambiarEstado">
+                                            <i class="fa fa-lock fa-2x"></i> Activar
+                                        </button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -137,6 +151,43 @@
             <!-- /.modal-dialog -->
         </div>
         <!--Fin del modal-->
+
+
+
+
+                <!--Inicio del modal cambiar estado categoria-->
+                <div class="modal fade" id="cambiarEstado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-primary modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Cambiar estado de la categoría</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                           
+                            <div class="modal-body">
+                                {{-- FORMULARIO PARA STORE --}}
+                                <form action="{{route('categoria.destroy','test')}}" method="post" class="form-horizontal">
+                                    {{-- codigo cuando se cambia el estad o elimina un registro --}}
+                                    {{method_field('delete')}}
+                                    {{-- {{csrf_field()}} es para evitar los ataques--}}
+                                    {{csrf_field()}}
+        
+                                    <input type="hidden" id="id_categoria" name="id_categoria" value="">
+                                    <p>Estas seguro de cambiar el estado?</p>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times fa-2x">Cerrar</i></button>
+                                        <button type="submit" class="btn btn-success"><i class="fa fa-lock fa-2x">Aceptar</i></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!--Fin del modal-->
    
 </main>
 

@@ -77,6 +77,44 @@
     <script src="{{asset('js/Chart.min.js')}}"></script>
     <!-- GenesisUI main scripts -->
     <script src="{{asset('js/template.js')}}"></script>
+
+
+    <script>
+        /*EDITAR CATEGORIA EN VENTANA MODAL*/
+        $('#abrirmodalEditar').on('show.bs.modal', function (event) {
+       //console.log('modal abierto');
+       
+       var button = $(event.relatedTarget) //hace referencia al boton editar
+       var nombre_modal_editar = button.data('nombre')//llamamos al data-nombre del boton editar
+       var descripcion_modal_editar = button.data('descripcion')//llamamos al data-descripcion del boton editar
+       var id_categoria = button.data('id_categoria')//llamamos al data-id_categoria del boton editar
+       var modal = $(this)
+       // modal.find('.modal-title').text('New message to ' + recipient)
+       modal.find('.modal-body #nombre').val(nombre_modal_editar);//encuentra dentro del div modal-body el id nombre del form.blade.php y cargar esa informacion dentro de nombre_modal_editar
+       modal.find('.modal-body #descripcion').val(descripcion_modal_editar);
+       modal.find('.modal-body #id_categoria').val(id_categoria);//este es del campo oculto que esta en el index
+       })
+
+
+        /******************************************************/
+        /*INICIO ventana modal para cambiar estado de Categoria*/
+        
+        $('#cambiarEstado').on('show.bs.modal', function (event) {
+        
+        //console.log('modal abierto');
+        
+        var button = $(event.relatedTarget) 
+        var id_categoria = button.data('id_categoria')
+        var modal = $(this)
+        // modal.find('.modal-title').text('New message to ' + recipient)
+        
+        modal.find('.modal-body #id_categoria').val(id_categoria);
+        })
+         
+        /*FIN ventana modal para cambiar estado de la categoria*/
+       
+   </script>
+
 </body>
 
 </html>
