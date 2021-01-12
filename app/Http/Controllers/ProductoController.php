@@ -16,7 +16,7 @@ class ProductoController extends Controller
             $sql = trim($request->get('buscarTexto'));
             $productos=DB::table('productos as p')
             ->join('categorias as c','p.idcategoria','=','c.id')//esta relacion debe cumplirse
-            ->select('p.id','p.idcategoria','p.nombre','p.precio_venta','p.stock','p.condicion','c.nombre as categoria')
+            ->select('p.id','p.idcategoria','p.nombre','p.precio_venta','p.codigo','p.stock','p.condicion','c.nombre as categoria')
             ->where('p.nombre','LIKE','%'.$sql.'%')
             ->orwhere('p.codigo','LIKE','%'.$sql.'%')
             ->orderBy('p.id','desc')
@@ -27,8 +27,8 @@ class ProductoController extends Controller
             ->select('id','nombre','descripcion')
             ->where('condicion','=','1')->get();//solo filtramos los activos
             //creamos una carpeta producto dentro de view y adentro un index
-            // return view('producto.index',["productos"=>$productos,"categorias"=>$categorias,"buscarTexto"=>$sql]);
-            return $productos;
+            return view('producto.index',["productos"=>$productos,"categorias"=>$categorias,"buscarTexto"=>$sql]);
+            // return $productos;
 
         }
     }
