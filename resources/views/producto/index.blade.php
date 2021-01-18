@@ -46,7 +46,7 @@
                             <th>Codigo</th>
                             <th>Precio venta ($)</th>
                             <th>Stock</th>
-                            {{-- <th>Imagen</th> --}}
+                            <th>Imagen</th>
                             <th>Estado</th>
                             <th>Editar</th>
                             <th>Cambiar Estado</th>
@@ -60,7 +60,9 @@
                                 <td>{{$prod->codigo}}</td>
                                 <td>{{$prod->precio_venta}}</td>
                                 <td>{{$prod->stock}}</td>
-                                {{-- <td>{{$prod->imagen}}</td> --}}
+                                <td>
+                                    <img src="{{asset('storage/img/producto/'.$prod->imagen)}}" id="imagen1" alt="{{$prod->nombre}}" class="img-resposive" width="70px" height="70px">
+                                </td>
 
 
                                 <td>
@@ -117,7 +119,7 @@
                
                 <div class="modal-body">
                     {{-- FORMULARIO PARA STORE --}}
-                    <form action="{{route('producto.store')}}" method="post" class="form-horizontal">
+                    <form action="{{route('producto.store')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                         {{-- {{csrf_field()}} es para evitar los ataques--}}
                         {{csrf_field()}}
                         @include('producto.form')
@@ -145,7 +147,7 @@
                    
                     <div class="modal-body">
                         {{-- FORMULARIO PARA STORE --}}
-                        <form action="{{route('producto.update','test')}}" method="post" class="form-horizontal">
+                        <form action="{{route('producto.update','test')}}" method="post" class="form-horizontal" enctype="multipart/form-data">
                             {{-- codigo cuando se edita un registro --}}
                             {{method_field('patch')}}
                             {{-- {{csrf_field()}} es para evitar los ataques--}}

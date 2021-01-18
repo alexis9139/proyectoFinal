@@ -49,6 +49,15 @@
             </div>
 </div>
 
+<div class="form-group row">
+    <label class="col-md-3 form-control-label" for="imagen">Imagen</label>
+    <div class="col-md-9">
+      
+        <input type="file" id="imagen" name="imagen" class="form-control">
+           
+    </div>
+</div>
+
 
 <div class="modal-footer">
     <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times fa-2x"></i> Cerrar</button>
