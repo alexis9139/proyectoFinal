@@ -115,7 +115,7 @@ class ProductoController extends Controller
     public function destroy(Request $request)//aqui le agregamos el request
     {
         //id_categoria viene desde el formulario
-        $producto = Producto::findOrFail($request->id_producto);//toma el id para editar
+        $producto = Producto::findOrFail($request->id_producto);//toma el id para editar, es algo oculto
         if($producto->condicion == '1'){//si esta activo
             $producto->condicion = '0';
             $producto->save();

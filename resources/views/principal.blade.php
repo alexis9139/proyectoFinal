@@ -141,6 +141,19 @@
        // modal.find('.modal-body #subirImagen').html("<img src="img/producto/imagen_modal_editar">");
         modal.find('.modal-body #id_producto').val(id_producto);
         })
+
+
+
+
+        /*INICIO ventana modal para cambiar el estado del producto*/
+        $('#cambiarEstado').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) 
+        var id_producto = button.data('id_producto')
+        var modal = $(this)
+        // modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body #id_producto').val(id_producto);
+        })
+        /*FIN ventana modal para cambiar estado del producto*/
        
    </script>
 
